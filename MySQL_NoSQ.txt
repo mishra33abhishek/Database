@@ -1,0 +1,137 @@
+The Key Differences Between MySQL and NoSQL
+
+First off, MySQL is a relational database that is based on a tabular design. NoSQL is non-relational and has a document-based design.
+
+A MySQL database is currently more popular in the market than NoSQL because the latter is still fairly new. That means, at present, MySQL encompasses a large community while NoSQL has a comparatively small community.
+
+While MySQL is not easily scalable due to rigid schema restrictions, NoSQL can easily be scaled because of its dynamic schema nature.
+
+Another key difference is MySQL requires a detailed database model before the creation of the database while NoSQL requires no detailed modeling.
+
+Also, unlike MySQL, which is a type of relational database, NoSQL is more design-based, with examples like CouchDB and MongoDB. Furthermore, NoSQL is much more flexible than MySQL.
+
+One of the good things about MySQL database management is that it is available with a broad range of reporting tools that can help the validity of an application. On the other hand, NoSQL databases do not have reporting tools for performance testing and analysis.
+
+--------------------------------------------------------------------------------------------
+
+
+database system:
+1. database- the collected data rom users
+2.dmbs- the systems or softwares that manages data,manupulate it and displays when requested from server
+
+
+file system vs dbms:
+1. security
+2. large data fetched for small querry
+3.creaton updation easy
+4. etc
+
+
+Architecture:
+-->2 tier:
+1.applicaton + databse through jdbc/odbc.
+2. user directly attached to databse , security compromised
+3. large no. of querries cant be handeled as database manages querry and data accessing at same time, sacalability problem
+
+
+--> 3 tier:
+ 3 tier means 3 layers ie.  application(user)--bussiness layer -- database
+Bussiness layers handles all querries , mamages them analyse them , while database only lets data getting accessed from it
+ 
+ 
+ Schema:
+ its the architecture of particular table, as how data be stored and retried and managed there.   (eg..  student and faculty schemas)
+ 
+ 
+ 3-Schema Architecture:
+ there are 3 layers: 
+ 1.External Schema: is at user end, as how data be displayed to user..used just before UI
+ 2. Conceptual schema:  is the layer where all logical handeling of data occurs. queries run and tables prepared accordingly.
+ 3. Physical Schema: is the designing of structures that actually stores data
+ in pysical form.
+ 
+ {
+ 
+ Between user and database this architecture standsand provides data independence
+ Between external and conceptual schema is provided logical independency
+ Between conceptual and physical schemas , phsical independence is provided
+
+ } 
+ --------------------------------------------------------------------------------
+ Candiate Key: set of attributes that are unique(cant be null or overlapping by chance)
+ 
+>>>>>>>Primary Key: just one among canditate keys that has {UNiQUE + NotNull} feature
+
+>>>>>>Foreign key: A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table or from column in same table. 
+
+{ provides Referential Integrity}
+ 
+if creating child table(referring table) in oracle we can write like-->  
+Create table Course(
+		Course_id varchar(10),
+		Course_name varchar(20),
+		Roll_Num int references Student(RollNo.)   ----> here refers to student table attribute RollNo		
+)
+
+if altering already ceated table -->
+Alter table Course ADD Constraint fk foreign key(RollNo) references Student(RollNo.)
+--> A table can have more than one foreign key
+
+Understanding Referentiak Integrity:
+Consider table Student with attributes and rows as follows:
+Student(RonnNo , Name , City)
+ 	(1 , A , Delhi)
+ 	(2 , B , Mumbai)
+ 	(3 , C , Chandigarh)
+ 	
+ 	Consider another table Course as
+ 	Course(id , c_name , RollNo)
+ 		(c1 , DBMS, 1)
+ 		(C2 , Networks , 2)
+ 		
+ 		now if we want to do insert, delete, update operations im Referenced table then,
+ 		Insert Student(4 , D , Chandigarh)  ___ wont cause any violation
+ 		but
+ 		Delete and update cause violaton as-
+ 		deleting row1 destroys rollNo1 entry saying student doest exist
+ 		but as RollNo was forign key in refering table, that tabe says RollNo 1 still studying DBMS..thence integrity lost same with update..
+ 		
+ 		therefore use command-  on delete cascade --> delete entries everywhere
+ 		on delete Set Null - sets to nul  note if foeignn key is primary keys also give erroe as primary key cant be null.
+ 		
+ 		
+   what if we try to put data in Referencing table,
+    insert Course(7 , p , maths)____causes voilation as data entry may not exist in Student table ie base table
+    
+    but delete doesnt cause voilation...
+    
+   updation do cause voilation as if we try to change forign key itlsef..
+   
+>>>>>>>>Super Key: Canditate key + any other attribute/attributesforms super key
+ie.. all possible attributes that uniquely describe a tuple is called super key,
+canditate key is minimal set, while super key is from atleast t o utmost.
+--SuperSet of any Canditate key is super key
+
+R(a1, a2, a3, a4,.......an) is table & a1 is canditate key, no of super keys =?
+		= a^n-1
+		
+	if a1 & a2 are both canditate key, super key no. = 2^n-1 + 2^n-1 - 2^n-2
+-----------------------------------------------------------------------------
+
+ER MODEL - Entity Relationship model:
+	 Create table Student(RollNo int(10), name varchar(20), address varchar(50))
+	 Student--> entity    {rectangle represenation}
+	 RollNo, name, address--> attribute{ eclipse for single value, double eclipse for multivaled}
+	 entity wih attribute and its structure is schema
+	 relation between two wntity is to studied     {Relationship diamong representatiom}
+	 
+
+Types Of atrribute	:
+1. single-valued(e name age)  &multivaled ()
+
+
+
+
+
+
+ 
